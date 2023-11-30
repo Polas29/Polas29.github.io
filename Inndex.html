@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Morseova abeceda</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(to right, #00FFFF, #800080); /* Tyrkysová do purpurového gradientu */
+    }
+    
+    .container {
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      background-color: white;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    input[type="text"] {
+      padding: 10px;
+      margin-bottom: 10px;
+      width: 200px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+    
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Morseova abeceda</h1>
+  <input type="text" id="morseInput" placeholder="Zadejte text v Morseově abecedě">
+  <br>
+  <button onclick="convertAndAlert()">Převést</button>
+</div>
+
+<script>
+  function convertAndAlert() {
+    const morseInput = document.getElementById('morseInput').value.trim();
+
+    // Funkce pro ověření, zda je vstup platným Morseovým kódem
+    function isValidMorseCode(text) {
+      return /^[.-\s]*$/.test(text);
+    }
+
+    // Funkce pro převod Morseovy abecedy na písmeno
+    function morseToLetter(morse) {
+      const morseCodeMap = {
+        '.-': 'A',
+        '-...': 'B',
+        '-.-.': 'C',
+        '-..': 'D',
+        '.': 'E',
+        '..-.': 'F',
+        '--.': 'G',
+        '....': 'H',
+        '..': 'I',
+        '.---': 'J',
+        '-.-': 'K',
+        '.-..': 'L',
+        '--': 'M',
+        '-.': 'N',
+        '---': 'O',
+        '.--.': 'P',
+        '--.-': 'Q',
+        '.-.': 'R',
+        '...': 'S',
+        '-': 'T',
+        '..-': 'U',
+        '...-': 'V',
+        '.--': 'W',
+        '-..-': 'X',
+        '-.--': 'Y',
+        '--..': 'Z',
+        '.----': '1',
+        '..---': '2',
+        '...--': '3',
+        '....-': '4',
+        '.....': '5',
+        '-....': '6',
+        '--...': '7',
+        '---..': '8',
+        '----.': '9',
+        '-----': '0',
+        '/': ' ',
+      };
+
+      const letters = morse.split(' ').map(code => morseCodeMap[code]).join('');
+      return letters;
+    }
+
+    if (isValidMorseCode(morseInput)) {
+      const letter = morseToLetter(morseInput);
+      alert(`Převedený text: ${letter}`);
+    } else {
+      alert('Zadaný text není platný Morseův kód!');
+    }
+  }
+</script>
+
+</body>
+</html>
